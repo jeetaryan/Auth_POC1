@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "SiPmYkBl3M53SUbP0L8ALU0rbzeozWVTMLXwpENBx40=",
+  "Source": "jwt_auth_api",
+  "BasePath": "_content/jwt_auth_api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
