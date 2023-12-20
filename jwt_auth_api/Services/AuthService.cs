@@ -2,8 +2,10 @@
 using jwt_auth_api.Interfaces;
 using jwt_auth_api.Models;
 using jwt_auth_api.Request_models;
-using Microsoft.IdentityModel.JsonWebTokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 namespace jwt_auth_api.Services
 {
@@ -38,10 +40,24 @@ namespace jwt_auth_api.Services
                         new Claim("Username", user.Email),
                         new Claim("Password", user.Password)
                     };
+                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:key"]));
+                    var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    var token = new JwtSecurityToken(
+                        _configuration["Jwt:Issuer"],
+                        _configuration["Jwt:Audience"],
+                        claims,
+                        expires: DateTime.UtcNow.AddDays(1),
+                        signingCredentials: signIn);
+                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+                    return jwtToken;
                 }
-                else {
+                else
+                {
                     return "no user found";
                 }
+            }
+            else {
+                return "Credential are not correct.";
             }
         }
     }

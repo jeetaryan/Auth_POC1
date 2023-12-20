@@ -55,11 +55,22 @@ namespace jwt_auth_api.Services
             return employeesList;
         }
 
-        public Employee UpdateEmployee(Employee employee)
+        public Employee UpdateEmployee(int id, Employee employee)
         {
-            var updated=_jwtContext.Employees.Update(employee);
-            _jwtContext.SaveChanges();
-            return updated.Entity;
+            var data = _jwtContext.Employees.SingleOrDefault(x => x.Id == id);
+            if (data != null)
+            {
+                data.Position = employee.Position;
+                data.Name = employee.Name;
+                data.Company = employee.Company;
+                _jwtContext.SaveChanges();
+                return data;
+            }
+            else
+            {
+                return new Employee();
+            }
+
         }
     }
 }
