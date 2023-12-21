@@ -6,8 +6,8 @@ namespace jwt_auth_api.Interfaces
     {
         public List<Employee> GetEmployeeList();
         public Employee GetEmployeeDetails(int id);
-        public Employee AddEmployee(Employee employee);
-        public Employee UpdateEmployee(int id,Employee employee);
+        public String AddEmployee(Employee employee);
+        public String UpdateEmployee(int id,Employee employee);
         public bool DeleteEmployee(int id);
 
     }

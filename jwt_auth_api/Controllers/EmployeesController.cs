@@ -35,7 +35,7 @@ namespace jwt_auth_api.Controllers
 
         // POST api/<EmployeesController>
         [HttpPost]
-        public Employee Post([FromBody] Employee employee)
+        public String Post([FromBody] Employee employee)
         {
             var emp = _employeeService.AddEmployee(employee);   
             return emp; 
@@ -43,7 +43,7 @@ namespace jwt_auth_api.Controllers
 
         // PUT api/<EmployeesController>/5
         [HttpPut("{id}")]
-        public Employee Put(int id, [FromBody] Employee employee)
+        public String Put(int id, [FromBody] Employee employee)
         {
             var emp = _employeeService.UpdateEmployee(id,employee);
             return emp; 

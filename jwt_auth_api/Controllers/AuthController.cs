@@ -27,10 +27,10 @@ namespace jwt_auth_api.Controllers
 
         // PUT api/<AuthController>/5
         [HttpPost("addUser")]
-        public User AddUser([FromBody] User value)
+        public JsonResult AddUser([FromBody] User value)
         {
             var user = _authService.AddUser(value);
-            return user;
+            return new JsonResult(user);
         }
 
     }

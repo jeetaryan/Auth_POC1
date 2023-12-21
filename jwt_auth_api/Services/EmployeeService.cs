@@ -13,11 +13,11 @@ namespace jwt_auth_api.Services
             _jwtContext = jwtContext;
         }
 
-        public Employee AddEmployee(Employee employee)
+        public string AddEmployee(Employee employee)
         {
-            var empAdd = _jwtContext.Employees.Add(employee);
+            _jwtContext.Employees.Add(employee);
             _jwtContext.SaveChanges();
-            return empAdd.Entity;
+            return "Record added";
         }
 
         public bool DeleteEmployee(int id)
@@ -55,7 +55,7 @@ namespace jwt_auth_api.Services
             return employeesList;
         }
 
-        public Employee UpdateEmployee(int id, Employee employee)
+        public string UpdateEmployee(int id, Employee employee)
         {
             var data = _jwtContext.Employees.SingleOrDefault(x => x.Id == id);
             if (data != null)
@@ -64,11 +64,11 @@ namespace jwt_auth_api.Services
                 data.Name = employee.Name;
                 data.Company = employee.Company;
                 _jwtContext.SaveChanges();
-                return data;
+                return "Record updated";
             }
             else
             {
-                return new Employee();
+                return "Record could not be updated";
             }
 
         }

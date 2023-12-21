@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace jwt_auth_api.Services
 {
@@ -20,11 +21,11 @@ namespace jwt_auth_api.Services
             _configuration = configuration;
         }
 
-        public User AddUser(User user)
+        public JsonResult AddUser(User user)
         {
-            var addUser = _jwtContext.Users.Add(user);
+            _jwtContext.Users.Add(user);
             _jwtContext.SaveChanges();
-            return addUser.Entity;
+            return new JsonResult("200","User added successfully.");
         }
 
         public string Login(LoginRequest loginRequest)
